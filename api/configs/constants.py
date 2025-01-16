@@ -10,3 +10,12 @@ class ErrorMessages:
     PROCESSING_ERROR = "An error occurred while processing your question. Please try again."
     GENERIC_ERROR = "An unexpected error occurred. Please try again later."
     DOCUMENT_UPLOAD_ERROR = "The document could not be uploaded. Please try again."
+
+class OperationNames:
+    UPLOAD_DOC = "upload_doc"
+    SHOW_COLLECTION = "show_collection"
+    CHAT = "chat"
+
+class StatusCodes:
+    SUCCESS = 200
+    INTERNAL_SERVER_ERROR = 500
