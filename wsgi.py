@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from api.routers import upload_doc
 
 def create_app():
     app = FastAPI(
@@ -7,10 +8,14 @@ def create_app():
         description='Chat with your books.'
     )
 
+    init_routers(app)
     configure_middlewares(app)
     return app
 
-def configure_middlewares(app: FastAPI):
+def init_routers(app: FastAPI) -> None:
+    app.include_router(upload_doc.router)
+
+def configure_middlewares(app: FastAPI) -> None:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=['*'],
