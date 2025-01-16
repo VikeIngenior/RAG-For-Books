@@ -12,13 +12,17 @@ current_docs = []
 
 
 def load_documents(file):
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
-        temp_file.write(file.read())
-        temp_file_path = temp_file.name
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
+            temp_file.write(file.read())
+            temp_file_path = temp_file.name
 
-    loader = PyPDFLoader(temp_file_path)
-    doc = loader.load()
-    return doc
+        loader = PyPDFLoader(temp_file_path)
+        doc = loader.load()
+        return doc
+
+    except Exception as e:
+        print(e)
 
 def upload_docs_to_vectordb(docs):
     try:
