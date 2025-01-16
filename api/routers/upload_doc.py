@@ -10,9 +10,10 @@ async def read_root():
     return {"message": "API is running"}
 
 @router.post("/upload")
-async def upload_docs(file: UploadFile = File(...), request: Request = None):
+async def upload_doc(file: UploadFile = File(...), request: Request = None):
     try:
         doc = load_documents(file.file)
         counts = upload_docs_to_vectordb(doc)
+        return {'Chunk count': counts['chunk_counts']}
     except Exception as e:
         raise HTTPException(status_code=500, detail={'message': ErrorMessages.DOCUMENT_UPLOAD_ERROR})
